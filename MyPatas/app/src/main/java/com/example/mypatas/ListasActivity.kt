@@ -28,7 +28,7 @@ class ListasActivity : AppCompatActivity() {
 
         for (fruta in listaFrutas) {
             if (fruta == entrada) {
-                saida = "É fofa"
+                saida = "É fruta"
                 break
             }
         }

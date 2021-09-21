@@ -1,4 +1,4 @@
-package com.example.mypatas
+package com.example.mypatas.greeter
 
 class GreeterTipo1 (val cumprimento: String) {
 
