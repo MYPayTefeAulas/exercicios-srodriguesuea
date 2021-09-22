@@ -27,6 +27,10 @@ class TelaInicialActivity : AppCompatActivity() {
             val intent = Intent(this, Greeter1Activity::class.java)
             startActivity(intent)
         }
+        binding.btAbrirExAgenda.setOnClickListener {
+            val intent = Intent(this, AgendaActivity::class.java)
+            startActivity(intent)
+        }
                 setContentView(binding.root)
     }
 }
