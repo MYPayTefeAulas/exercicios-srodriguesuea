@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPatas">
         <activity
-            android:name=".TelaInicialActivity"
+            android:name=".AgendaActivity"
             android:exported="true" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -19,12 +19,14 @@
         </intent-filter>
         </activity>
         <activity
+            android:name=".TelaInicialActivity"
+            android:exported="true"/>
+        <activity
             android:name=".greeter.Greeter1Activity"
             android:exported="true" />
         <activity
             android:name=".PessoasActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".ListasActivity"
             android:exported="true" />

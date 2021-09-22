@@ -23,16 +23,16 @@ class PessoasActivity : AppCompatActivity() {
         binding.btImprimir.setOnClickListener {
             binding.txtSaida.text = imprimePessoa()
         }
-        binding.btSalvar.setOnClickListener {
-            nome = binding.txtNome.text.toString()
-            binding.txtNome.text.clear()
-            idade = binding.txtIdade.text.toString().toInt()
-            binding.txtIdade.text.clear()
-
-            val pessoa = Pessoa (nome,idade)
-            listaPessoas.add(pessoa)
-
-        }
+//        binding.btSalvar.setOnClickListener {
+//            nome = binding.txtNome.text.toString()
+//            binding.txtNome.text.clear()
+//            idade = binding.txtIdade.text.toString().toInt()
+//            binding.txtIdade.text.clear()
+//
+//            val pessoa = Pessoa (nome,idade)
+//            listaPessoas.add(pessoa)
+//
+//        }
         setContentView(binding.root)
     }
 
