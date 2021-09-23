@@ -36,4 +36,11 @@ class Agenda {
     fun retornarNumeroContato():Int{
         return listacontatos.size
     }
+    fun existeTelefone(telefone: String): Boolean{
+        for (contato in listacontatos){
+           if (contato.telefone == telefone)
+               return true
+        }
+        return false
+    }
 }
