@@ -31,8 +31,8 @@ class PessoasActivity : AppCompatActivity() {
 
             val pessoa = Pessoa (nome,idade, telefone = null)
             listaPessoas.add(pessoa)
-
         }
+
         setContentView(binding.root)
     }
 

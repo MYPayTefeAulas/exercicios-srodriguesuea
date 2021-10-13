@@ -19,21 +19,56 @@ class AgendaActivity : AppCompatActivity() {
             val nome = binding.txtEntradaNomeAgenda.text.toString()
             val telefone = binding.txtEntradaTelefoneAgenda.text.toString()
             val novoContato = Pessoa(nome,idade = 0, telefone)
-            if(agenda.existeTelefone(telefone)){
-                binding.txtStatusAgenda.setTextColor(Color.rgb(200,10,10))
-                binding.txtStatusAgenda.text= "Este contato já existe"
-            } else{
+            if (novoContato.verificaNomeVazio()&&novoContato.verificaTelefoneVazio()){
+                binding.txtStatusAgenda.setTextColor(corVermelha)
+                binding.txtStatusAgenda.text = "Por favor digite um nome e telefone"
+            } else if (novoContato.verificaNomeVazio()){
+                binding.txtStatusAgenda.setTextColor(corVermelha)
+                binding.txtStatusAgenda.text = "Por favor digite um nome"
+            } else if (novoContato.verificaTelefoneVazio()){
+                binding.txtStatusAgenda.setTextColor(corVermelha)
+                binding.txtStatusAgenda.text = "Por favor digite um telefone"
+            } else if(agenda.checarContatoRepetido(novoContato)){
+                binding.txtStatusAgenda.setTextColor(corVermelha)
+                binding.txtStatusAgenda.text = "Este contato já existe"
+            }else{
                 agenda.salvarContato(novoContato)
-                binding.txtStatusAgenda.setTextColor(Color.rgb(10,200,30))
-                binding.txtStatusAgenda.text= ""
+                binding.txtStatusAgenda.setTextColor(corVerde)
+                binding.txtStatusAgenda.text = "Contato salvo com sucesso"
+                binding.txtEntradaNomeAgenda.setText("")
+                binding.txtEntradaTelefoneAgenda.setText("")
+            }
+        }
+        binding.btBuscarContato.setOnClickListener {
+            val contatoExistente = binding.txtPesquisar.text.toString()
+            val pessoaPesquisar = Pessoa(contatoExistente,0,"")
+
+            if (agenda.checarVazio()){
+                binding.txtStatusAgenda.text = "Não existem contatos em sua agenda!"
+            }else if (!agenda.pesquisarContato(pessoaPesquisar)){
+                binding.txtStatusAgenda.text = "Contato não encontrado"
+            } else {
+                binding.txtEntradaNomeAgenda.setText(agenda.imprimirNomePesquisa(pessoaPesquisar))
+                binding.txtEntradaTelefoneAgenda.setText(agenda.imprimirTelefonePesquisa(pessoaPesquisar))
             }
 
+//            val contatoExistente = binding.txtPesquisar.text.toString()
+//          if (agenda.existeContato(contatoExistente)){
+//               binding.txtStatusPesquisa.text
+//           } else{
+//               binding.txtStatusPesquisa.setTextColor(Color.rgb(200,10,20))
+//               binding.txtStatusPesquisa.text= "Contato Inexistente"
+//           }
         }
 
         binding.btImprimirAgenda.setOnClickListener {
-
-            binding.txtEntradaNomeAgenda.setText(agenda.imprimirNomeContatos())
-            binding.txtEntradaTelefoneAgenda.setText(agenda.imprimirTelefoneContatos())
+            if (agenda.checarVazio()){
+                binding.txtStatusAgenda.setTextColor(Color.rgb(200,10,10))
+                binding.txtStatusAgenda.text = "Não existe contato para imprimir"
+            }else{
+                binding.txtEntradaNomeAgenda.setText(agenda.imprimirNomeContatos())
+                binding.txtEntradaTelefoneAgenda.setText(agenda.imprimirTelefoneContatos())
+            }
         }
 
         binding.btDeletarAgenda.setOnClickListener {
@@ -48,5 +83,10 @@ class AgendaActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
+    }
+
+    companion object{
+        val corVermelha: Int = Color.rgb(200,10,10)
+        val corVerde: Int = Color.rgb(10,200,10)
     }
 }
